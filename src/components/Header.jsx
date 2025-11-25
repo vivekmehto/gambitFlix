@@ -3,7 +3,7 @@ import React from 'react'
 const Header = () => {
   return (
     <div className=' w-full absolute bg-linear-to-b from-black to-transparent p-4 space-x-2 z-10'>
-      <div className='flex items-center gap-0'>
+      <div className='flex items-center gap-0 w-10/12 mx-auto '>
   {/* <img 
       className='w-32 cursor-pointer m-0'
       src='logo-rmbg.png'
