@@ -1,6 +1,15 @@
+import React, { useState } from "react";
+
 import Header from "./Header";
 
 const Login = () => {
+
+
+  const [isSignedInForm, setIsSignedInForm] = useState(true);
+
+  const toggleSignInForm = () => {
+    setIsSignedInForm(!isSignedInForm);
+  };
   return (
     <div className="relative h-screen w-full">
       <Header />
@@ -22,7 +31,16 @@ const Login = () => {
           shadow-xl
         "
       >
-        <h2 className="text-3xl font-bold mb-6">Sign In</h2>
+        <h2 className="text-3xl font-bold mb-6"> {isSignedInForm ? "Sign In" : "Sign Up"}</h2>
+
+
+    { !isSignedInForm && (
+        <input
+          type="text"
+          placeholder="Username"
+          className="p-3 mb-4 w-full rounded bg-gray-800 text-white outline-none"
+        />
+    )}
 
         <input
           type="email"
@@ -37,12 +55,12 @@ const Login = () => {
         />
 
         <button className="bg-red-600 hover:bg-red-700 w-full p-3 rounded font-semibold">
-          Login
+          {isSignedInForm ? "Sign In" : "Sign Up"}
         </button>
 
-        <p className="mt-4 text-gray-300 text-sm">
-          New to GambitFlix?{" "}
-          <span className="text-white font-medium cursor-pointer">Sign up now</span>
+        <p className="mt-4 text-gray-300 text-sm" onClick={toggleSignInForm}>
+          {isSignedInForm ? "New to GambitFlix? " : "Already have an account? "}
+          <span className="text-white font-medium cursor-pointer">{isSignedInForm ? "Sign up now" : "Sign in now"}</span>
         </p>
       </form>
     </div>
