@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import { useState, useRef } from "react";
 
 import Header from "./Header";
+import { checkValidData } from "../utils/validate";
 
 const Login = () => {
-
-
   const [isSignedInForm, setIsSignedInForm] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const email = useRef(null);
+  const password = useRef(null);
+  const username = useRef(null);
+
+  const handleButtonClick = () => {
+
+    const message = checkValidData(email.current.value,password.current.value,username.current.value);
+    console.log("Validation Result:", message);
+    setErrorMessage(message);
+
+  }
 
   const toggleSignInForm = () => {
     setIsSignedInForm(!isSignedInForm);
@@ -23,6 +35,7 @@ const Login = () => {
 
       {/* Centered Form */}
       <form
+      onSubmit={(e) => { e.preventDefault(); }}
         className="
           absolute top-1/2 left-1/2 
           -translate-x-1/2 -translate-y-1/2
@@ -36,6 +49,7 @@ const Login = () => {
 
     { !isSignedInForm && (
         <input
+        ref={username}
           type="text"
           placeholder="Username"
           className="p-3 mb-4 w-full rounded bg-gray-800 text-white outline-none"
@@ -43,18 +57,22 @@ const Login = () => {
     )}
 
         <input
+        ref={email}
           type="email"
           placeholder="Email Address"
           className="p-3 mb-4 w-full rounded bg-gray-800 text-white outline-none"
         />
 
         <input
+        ref={password}
           type="password"
           placeholder="Password"
           className="p-3 mb-6 w-full rounded bg-gray-800 text-white outline-none"
         />
 
-        <button className="bg-red-600 hover:bg-red-700 w-full p-3 rounded font-semibold">
+        {errorMessage && <p className="text-red-700 mb-4 font-bold">{errorMessage}</p>}
+
+        <button className="bg-red-600 hover:bg-red-700 w-full p-3 rounded font-semibold" onClick={handleButtonClick}>
           {isSignedInForm ? "Sign In" : "Sign Up"}
         </button>
 
