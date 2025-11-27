@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import { auth } from "../utils/firebase";
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword , updateProfile} from "firebase/auth";
 
 const Login = () => {
   const [isSignedInForm, setIsSignedInForm] = useState(true);
@@ -13,12 +15,46 @@ const Login = () => {
 
   const handleButtonClick = () => {
 
-    const message = checkValidData(email.current.value,password.current.value,username.current.value);
+    const message = checkValidData(username.current?.value,email.current.value,password.current.value , isSignedInForm);
+    console.log(username.current)
     console.log("Validation Result:", message);
     setErrorMessage(message);
 
-  }
+    if(message) return;
 
+    if(!isSignedInForm){
+
+  createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    console.log("User signed up:", user);
+     return updateProfile(user, {
+      displayName: username.current.value,
+    });
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error("Error signing up:", errorCode, errorMessage);
+    setErrorMessage(errorCode + ": " + errorMessage);
+  });
+
+  }else{
+    signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    console.log("User signed in:", user);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error("Error signing in:", errorCode, errorMessage);
+    setErrorMessage(errorCode + ": " + errorMessage);
+  });
+  }
+  }
   const toggleSignInForm = () => {
     setIsSignedInForm(!isSignedInForm);
   };
