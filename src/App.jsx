@@ -4,6 +4,8 @@ import Body from "./components/Body";
 import Login from "./components/Login";
 import Browse from "./components/Browse";
 import About from "./components/About";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 
 function App() {
@@ -27,9 +29,9 @@ function App() {
   ])
 
   return (
-    <>
+    <><Provider store={appStore}>
       <RouterProvider router={router} />
-    </>
+    </Provider></>
   )
 }
 
