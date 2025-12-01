@@ -1,6 +1,7 @@
 
 import Header from "./Header";
 import Footer from "./Footer";
+import { Link } from "react-router";
 
 const Body = () => {
   return (
@@ -25,9 +26,9 @@ const Body = () => {
           <p className="mt-4 text-white text-lg sm:text-xl">
             Watch anywhere and anytime.
           </p>
-          <button className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+          <Link to="/browse"><button className="mt-6 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
             Get Started
-          </button>
+          </button></Link>
         </div>
       </header>
 
