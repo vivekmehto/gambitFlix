@@ -10,6 +10,7 @@ import { auth } from "./utils/firebase";
 import { addUser, removeUser } from "./utils/userSlice";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 },
 {
   path: "Login",
-  element: <Login/>,
+  element: <PublicRoute><Login/></PublicRoute>,
 },
 {
   path: "browse",
@@ -34,22 +35,23 @@ function App() {
 }
   ]);
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, you can access user information here
-        const {uid, email, displayName} = user;
-        dispatch(addUser({uid: uid, email: email, displayName: displayName}));
-
-      } else {
+ useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      dispatch(addUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName
+      }));
+    } else {
       dispatch(removeUser());
-      }
-    });
-  }, []);
+    }
+  });
 
+  return () => unsubscribe();
+}, [dispatch]);
   return (
       <RouterProvider router={router} />
-
   )
 }
 
