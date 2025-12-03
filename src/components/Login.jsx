@@ -1,4 +1,3 @@
-// src/components/Login.jsx
 import { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";

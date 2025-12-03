@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <header className="
       w-full absolute top-0 z-20
-      bg-gradient-to-b from-black/90 via-black/40 to-transparent
+      bg-linear-to-b from-black/90 via-black/40 to-transparent
       px-6 py-4
     ">
       <div className="w-11/12 mx-auto flex items-center justify-between">
@@ -40,18 +40,7 @@ const Header = () => {
               {user.displayName || "User"}
             </p>
 
-            {/* Avatar */}
-            <img
-              src={user.photoURL}
-              alt="User Avatar"
-              className="
-                w-10 h-10 object-cover 
-                ring-2 ring-white/40 shadow-lg 
-                cursor-pointer hover:ring-red-600 hover:scale-105 
-                transition-all duration-200
-              "
-            />
-
+           
             {/* Sign Out Button */}
             <button
               onClick={handleSignOut}
