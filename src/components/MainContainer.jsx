@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
 import VideoBackground from "./VideoBackground";
 import VideoTitle from "./VideoTitle";
+import {MainContainerShimmer} from "./ShimmerUI";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
 
-  if (!movies) return;
+  if (!movies) return <MainContainerShimmer />;
 
   const mainMovie = movies[0];
 

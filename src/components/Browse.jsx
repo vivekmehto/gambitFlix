@@ -5,9 +5,13 @@ import Header from "./Header"
 import MainContainer from "./MainContainer"
 import SecondaryContainer from "./SecondaryContainer"
 import Footer from "./Footer"
+import { useSelector } from "react-redux"
+import GptSearch from "./GptSearch"
 
 
 const Browse = () => {
+  
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useNowPlayingMovies();
   usePopularMovies();
@@ -16,8 +20,14 @@ const Browse = () => {
   return (
     <div>
       <Header />
-      <MainContainer />
-      <SecondaryContainer />
+        {showGptSearch ? (
+        <GptSearch />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
       <Footer />
     </div>
   )

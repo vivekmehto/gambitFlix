@@ -1,11 +1,14 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   const handleSignOut = async () => {
     try {
@@ -14,6 +17,12 @@ const Header = () => {
     } catch (error) {
       console.error("Error signing out:", error);
     }
+  };
+
+
+  const handleGptSearchClick = () => {
+    // Toggle GPT Search
+    dispatch(toggleGptSearchView());
   };
 
   return (
@@ -34,14 +43,17 @@ const Header = () => {
         {/* User Section */}
         {user && (
           <div className="flex items-center gap-4">
-
-            {/* Username */}
+          <button
+            className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
+            onClick={handleGptSearchClick}
+          >
+            {showGptSearch ? "Homepage" : "GPT Search"}
+          </button>
             <p className="text-white font-semibold text-md hidden sm:block">
               {user.displayName || "User"}
             </p>
 
-           
-            {/* Sign Out Button */}
+             
             <button
               onClick={handleSignOut}
               className="
