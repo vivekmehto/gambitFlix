@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router";
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { toggleGptSearchView } from "../utils/gptSlice";
+// import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
@@ -20,10 +20,10 @@ const Header = () => {
   };
 
 
-  const handleGptSearchClick = () => {
-    // Toggle GPT Search
-    dispatch(toggleGptSearchView());
-  };
+  // const handleGptSearchClick = () => {
+  //   // Toggle GPT Search
+  //   dispatch(toggleGptSearchView());
+  // };
 
   return (
     <header className="
@@ -36,19 +36,19 @@ const Header = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2">
           <h1 className="text-4xl font-extrabold text-red-600 tracking-wide hover:text-red-500 transition-all duration-200">
-            ♞ Gambit<span className="text-white">Flix</span>
+            Gambit<span className="text-white">Flix</span>
           </h1>
         </Link>
 
         {/* User Section */}
         {user && (
           <div className="flex items-center gap-4">
-          <button
+          {/* <button
             className="py-2 px-4 mx-4 my-2 bg-purple-800 text-white rounded-lg"
             onClick={handleGptSearchClick}
           >
             {showGptSearch ? "Homepage" : "GPT Search"}
-          </button>
+          </button> */}
             <p className="text-white font-semibold text-md hidden sm:block">
               {user.displayName || "User"}
             </p>

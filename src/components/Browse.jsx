@@ -6,28 +6,31 @@ import MainContainer from "./MainContainer"
 import SecondaryContainer from "./SecondaryContainer"
 import Footer from "./Footer"
 import { useSelector } from "react-redux"
-import GptSearch from "./GptSearch"
+import useTvPopular from "../hooks/useTvPopular"
+import useUpcomingMovies from "../hooks/useUpcomingMovies"
+import useTvAirToday from "../hooks/useTvAirToday"
+import useTvTopRated from "../hooks/useTvTopRated"
 
 
 const Browse = () => {
   
-  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  // const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
 
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
+  useTvPopular();
+  useUpcomingMovies();
+  useTvAirToday();
+  useTvTopRated();
  
   return (
     <div>
       <Header />
-        {showGptSearch ? (
-        <GptSearch />
-      ) : (
-        <>
+      
           <MainContainer />
           <SecondaryContainer />
-        </>
-      )}
+      
       <Footer />
     </div>
   )
