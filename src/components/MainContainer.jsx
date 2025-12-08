@@ -5,16 +5,19 @@ import { MainContainerShimmer } from "./ShimmerUI";
 
 const MainContainer = () => {
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
-  const selected = useSelector((store) => store.movies?.selected); 
+  const selected = useSelector((store) => store.movies?.selected);
 
   if (!movies) return <MainContainerShimmer />;
 
   const mainMovie = movies[0];
-  console.log(selected)
 
   const currentId = selected?.id || mainMovie?.id;
   const currentType = selected?.type || "movie";
-  const title = selected?.title || mainMovie?.original_title || mainMovie?.title || mainMovie?.name;
+  const title =
+    selected?.name ||
+    mainMovie?.original_title ||
+    mainMovie?.title ||
+    mainMovie?.name;
   const overview = selected?.overview || mainMovie?.overview || "";
 
   return (

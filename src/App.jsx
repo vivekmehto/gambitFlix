@@ -11,6 +11,7 @@ import { addUser, removeUser } from "./utils/userSlice";
 import { useDispatch } from "react-redux";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
+import MovieDetails from "./components/MovieDetails";
 
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
 
   {
     path: "/movie/:id",
-    element: <MovieDetails />
+    element: <ProtectedRoute><MovieDetails/></ProtectedRoute>,
   }
   ]);
 

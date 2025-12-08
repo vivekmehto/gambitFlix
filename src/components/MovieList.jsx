@@ -11,13 +11,14 @@ const MovieList = ({ title, movies }) => {
           <div className="flex">
             {movies.map((movie) => {
               const type = movie.media_type || (movie.name ? "tv" : "movie");
-
               return (
                 <MovieCard
                   key={movie.id}
                   id={movie.id}
                   posterPath={movie.poster_path}
                   type={type}
+                  name= {movie.name || movie.title}
+                  overview = {movie.overview}
                 />
               );
             })}
