@@ -32,7 +32,12 @@ function App() {
 {
   path: "about",
   element: <About/>,
-}
+},
+
+  {
+    path: "/movie/:id",
+    element: <MovieDetails />
+  }
   ]);
 
  useEffect(() => {

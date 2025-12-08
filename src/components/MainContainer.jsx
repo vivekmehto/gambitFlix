@@ -10,6 +10,7 @@ const MainContainer = () => {
   if (!movies) return <MainContainerShimmer />;
 
   const mainMovie = movies[0];
+  console.log(selected)
 
   const currentId = selected?.id || mainMovie?.id;
   const currentType = selected?.type || "movie";
